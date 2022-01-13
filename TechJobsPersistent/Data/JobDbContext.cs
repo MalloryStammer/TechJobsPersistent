@@ -22,3 +22,6 @@ namespace TechJobsPersistent.Data
         }
     }
 }
+
+
+//DbContext methods https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext?view=efcore-3.1#methods
