@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace TechJobsPersistent.ViewModels
 {
     public class AddEmployerViewModel
@@ -8,10 +10,8 @@ namespace TechJobsPersistent.ViewModels
         [Required(ErrorMessage = "Employer is required")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Location is required")]
+        [Required(ErrorMessage = "Employer location is required")]
         public string Location { get; set; }
-    }
-    public AddEmployerViewModel()
-    {
+
     }
 }

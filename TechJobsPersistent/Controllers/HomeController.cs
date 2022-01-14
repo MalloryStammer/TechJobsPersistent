@@ -32,13 +32,33 @@ namespace TechJobsPersistent.Controllers
         [HttpGet("/Add")]
         public IActionResult AddJob()
         {
-            return View();
+            //In AddJob() pass an instance of AddJobViewModel to the view.
+            List<Employer> employers = context.Employers.ToList();
+
+            AddJobViewModel addJobViewModel = new AddJobViewModel(employers);
+            return View(addJobViewModel);
         }
 
-        public IActionResult ProcessAddJobForm()
+        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel)
+        //In ProcessAddJobForm(), you need to take in an instance of AddJobViewModel
+        //and make sure that any validation conditions you want to add are met
+        //before creating a new Job object and saving it to the database
         {
-            return View();
-        }
+            if (ModelState.IsValid)
+            {
+                Job job = new Job
+                {
+                    Name = addJobViewModel.Name,
+                    EmployerId = addJobViewModel.EmployerId,
+                };
+
+                context.Jobs.Add(job);
+                context.SaveChanges(); 
+                return Redirect("Index");
+            }
+
+            return RedirectToAction("AddJob", addJobViewModel);
+            }
 
         public IActionResult Detail(int id)
         {

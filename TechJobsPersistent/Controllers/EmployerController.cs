@@ -25,23 +25,23 @@ namespace TechJobsPersistent.Controllers
 
         // GET: /<controller>/
         public IActionResult Index()
-        //  Complete Index() so that it passes all of the Employer objects in the database to the view. ch19...eager loading on 20.3
+        //  Complete Index() so that it passes all of the Employer objects in
+        //  the database to the view. ch19...eager loading on 20.3
         //  public IActionResult Index()
         //  {
-        //  List<Event> events = context.Events.Include(e => e.Category).ToList();
+        //  List<Event> events = context.Events.ToList();
         //    return View(events);
             //  }
 
         {
-            List<Employer> employerList = context.Employers.Include(e => e.Name).ToList();
+            List<Employer> employerList = context.Employers.ToList();
             return View(employerList);
         }
 
-        [HttpPost]
         public IActionResult Add()
         //      Create an instance of AddEmployerViewModel inside of the Add() method
         //          and pass the instance into the View() return method.
-        {
+       {
             AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel();
             return View(addEmployerViewModel);
         }
@@ -83,7 +83,7 @@ namespace TechJobsPersistent.Controllers
 
                 context.Employers.Add(employer);
                 context.SaveChanges();
-                return Redirect("/Employer/");
+                return Redirect("/Employer");
             }
 
             return View(addEmployerViewModel);
