@@ -10,8 +10,7 @@ FROM Employers
 WHERE location='St. Louis';
 
 --Part 3
-SELECT skills.name
+SELECT name, description
 FROM skills
 INNER JOIN jobskills ON skills.Id = jobSkills.SkillId
-WHERE jobSkills.JobId IS NOT NULL
-ORDER BY skills.name;
+ORDER BY name;
