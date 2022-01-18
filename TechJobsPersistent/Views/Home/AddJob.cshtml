@@ -3,7 +3,7 @@
 <h1>Add a Job</h1>
 
 <form asp-controller="Home" asp-action="ProcessAddJobForm" method="post">
-    <div  class="form-group">
+    <div class="form-group">
         <label asp-for="Name">Job Name</label>
         <input autocomplete="off" asp-for="Name" class="form-control" />
         <span asp-validation-for="Name"></span>
@@ -12,19 +12,42 @@
         <label asp-for="EmployerId">Employer: </label>
         <select asp-for="EmployerId" asp-items="@Model.Employers"></select>
         <br />
-        <a asp-controller="Employer" asp-action="Add">Add Employer</a>
     </div>
-
+    <div class="form-group">
+        @foreach (Skill skill in Model.Skills)
+        {
+                <label asp-for="@skill.Id">@skill.Name</label>
+                <input type="checkbox" name="selectedSkills" value="@skill.Id" />}
+    </div>
+    <br />
     <input type="submit" value="Add Job" />
 </form>
 
-@*In AddJob.cshtml, add a new <div class="form-group"> element to the form 
-                
-        Add the appropriate <label> and <input> tags to the new <div> element (AND SPAN- WE ADDED VALIDATION IN VIEWMODEL)
-        to create the form field to add employer information to the job.
+<a asp-controller="Employer" asp-action="Add">Add New Employer</a>
+<br />
+<a asp-controller="Skill" asp-action="Add">Add New Skill</a>
 
-        This field should be a dropdown menu with all of the employers in the database. (<select>)
 
-        In addition, add a link to the <div> element to add new employers. (ASP CONTROLLER ACTION ADD)
-        This way, if a user doesn’t see the employer they are looking for,
-        they can easily click on the link and add a new employer to the database.*@
+
+
+
+
+@*In AddJob.cshtml, add a new <div class="form-group"> element to the form
+
+    Add the appropriate <label> and <input> tags to the new <div> element (AND SPAN- WE ADDED VALIDATION IN VIEWMODEL)
+    to create the form field to add employer information to the job.
+
+    This field should be a dropdown menu with all of the employers in the database. (<select>)
+
+    In addition, add a link to the <div> element to add new employers. (ASP CONTROLLER ACTION ADD)
+    This way, if a user doesn’t see the employer they are looking for,
+    they can easily click on the link and add a new employer to the database.*@
+
+
+@*name attribute on the <input> tag the name of the array.
+    In this case, each <input> tag on the form for the skills checkboxes should have "selectedSkills" as the name.
+    Add a new <div class="form-group"> element to the form for collecting skills.
+    Loop through each object in the list of Skill objects.
+    Give each checkbox a label and add the checkbox input itself.
+    Add a link to the form to add skills to the database
+        so if a user doesn’t see the skills they need, they can add skills themselves!*@
